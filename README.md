@@ -385,7 +385,7 @@ A: Check the following:
 
 ```
 ai-news-agent/
-├── config.example.yaml   # Config template (safe to commit)
+├── config.example.yaml   # Config template
 ├── config.yaml           # Local config with keys (gitignored)
 ├── requirements.txt      # Python dependencies
 ├── main.py               # Entry point
