@@ -1,0 +1,129 @@
+# ============================================================
+# AI News Agent - Configuration
+# ============================================================
+
+# --- Active AI Provider ---
+# Choose which provider generates your digest.
+# Options: anthropic | openai | gemini | deepseek | groq | moonshot | zhipu | qwen | mistral
+ai_provider: "anthropic"
+
+# --- AI Providers ---
+# For each provider:
+#   api_key  - your API key
+#   base_url - leave empty to use the official endpoint;
+#              fill in your relay/proxy URL to use a third-party gateway
+#              (e.g. https://your-relay.com/v1)
+#   model    - model name to use
+providers:
+  anthropic:
+    api_key: ""
+    base_url: ""            # Default: https://api.anthropic.com
+    model: "claude-sonnet-4-6"
+
+  openai:
+    api_key: ""
+    base_url: ""            # Default: https://api.openai.com/v1
+    model: "gpt-4o"
+
+  gemini:
+    api_key: ""
+    base_url: ""            # Default: https://generativelanguage.googleapis.com/v1beta/openai/
+    model: "gemini-2.0-flash"
+
+  deepseek:
+    api_key: ""
+    base_url: ""            # Default: https://api.deepseek.com/v1
+    model: "deepseek-chat"
+
+  groq:
+    api_key: ""
+    base_url: ""            # Default: https://api.groq.com/openai/v1
+    model: "llama-3.3-70b-versatile"
+
+  moonshot:
+    api_key: ""
+    base_url: ""            # Default: https://api.moonshot.cn/v1
+    model: "moonshot-v1-8k"
+
+  zhipu:
+    api_key: ""
+    base_url: ""            # Default: https://open.bigmodel.cn/api/paas/v4
+    model: "glm-4-flash"
+
+  qwen:
+    api_key: ""
+    base_url: ""            # Default: https://dashscope.aliyuncs.com/compatible-mode/v1
+    model: "qwen-plus"
+
+  mistral:
+    api_key: ""
+    base_url: ""            # Default: https://api.mistral.ai/v1
+    model: "mistral-large-latest"
+
+# --- NewsAPI Key (data source, not AI provider) ---
+# Get yours at: https://newsapi.org
+newsapi_key: ""
+
+# --- Output Settings ---
+# Language for AI-generated summaries
+# Options: "zh" (Chinese), "en" (English), "ja" (Japanese), "ko" (Korean),
+#          "fr" (French), "de" (German), "es" (Spanish), "ru" (Russian), etc.
+language: "zh"
+
+# Number of top articles to display
+top_n: 10
+
+# Save a Markdown report file after each run
+save_report: false
+report_path: "reports/"
+
+# --- Data Sources ---
+sources:
+  rss: true
+  arxiv: true
+  hackernews: true
+  newsapi: false    # Set to true if you have a newsapi_key
+  websearch: true   # Web search (free with duckduckgo, or use tavily/serpapi)
+
+# ArXiv settings
+arxiv:
+  max_results: 20
+  query: "artificial intelligence OR large language model OR machine learning"
+
+# HackerNews settings
+hackernews:
+  min_points: 50
+  max_results: 15
+
+# NewsAPI settings (only used when sources.newsapi is true)
+newsapi:
+  query: "artificial intelligence AI"
+  language: "en"
+  max_results: 20
+
+# Web Search settings
+websearch:
+  # Engine options: duckduckgo (free, no key) | tavily | serpapi
+  engine: "duckduckgo"
+  query: "AI artificial intelligence latest news"
+  max_results: 10
+  tavily_api_key: ""   # https://tavily.com
+  serpapi_api_key: ""  # https://serpapi.com
+
+# --- RSS Feeds ---
+# Add, remove, or comment out feeds as you like
+rss_feeds:
+  - name: "OpenAI"
+    url: "https://openai.com/news/rss.xml"
+  - name: "Anthropic"
+    url: "https://www.anthropic.com/news/rss.xml"
+  - name: "Google DeepMind"
+    url: "https://deepmind.google/blog/rss.xml"
+  - name: "Hugging Face"
+    url: "https://huggingface.co/blog/feed.xml"
+  - name: "MIT Technology Review - AI"
+    url: "https://www.technologyreview.com/feed/"
+  - name: "VentureBeat AI"
+    url: "https://venturebeat.com/category/ai/feed/"
+  - name: "The Gradient"
+    url: "https://thegradient.pub/rss/"
