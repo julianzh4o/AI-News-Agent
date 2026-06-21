@@ -30,15 +30,16 @@ def _build_prompt(articles, top_n, lang_name):
         snippet = f" — {a['snippet'][:200]}" if a.get("snippet") else ""
         lines.append(f"{i}. [{a['source']}] {a['title']}{snippet}")
     return f"""You are an AI news curator. From the articles below, select {top_n} items (5–8 range) that cover any of these categories (skip a category if no relevant article exists):
-1. Major product launches or feature updates (OpenAI, Google, Anthropic, Meta, etc.)
-2. Funding events and industry M&A
-3. Technical breakthroughs or notable paper releases
-4. Industry standards and regulatory dynamics (AI safety frameworks, data governance)
+- Product Launch: Major product launches or feature updates (OpenAI, Google, Anthropic, Meta, etc.)
+- Funding: Funding events and industry M&A
+- Breakthrough: Technical breakthroughs or notable paper releases
+- Regulation: Industry standards and regulatory dynamics (AI safety frameworks, data governance)
 
 Output language: {lang_name}
 
 Output format (sorted by importance, most important first):
-- For each item: **[Category] Title** | Source | One-sentence summary
+- Number items sequentially: 1. 2. 3. etc.
+- For each item: **N. [Category] Title** | Source | One-sentence summary
 - End with a "今日趋势点评" (or "Trend Commentary" in non-Chinese output) section: 2–3 sentences on the overall patterns visible today.
 - Focus on technical progress and business dynamics. Skip entertainment or unrelated content.
 
@@ -83,16 +84,18 @@ def process_articles(articles, config):
         from openai import OpenAI
         effective_base_url = base_url or DEFAULT_BASE_URLS.get(provider_name)
         client = OpenAI(api_key=api_key, base_url=effective_base_url)
-        stream = client.chat.completions.create(
+        response = client.chat.completions.create(
             model=model,
             messages=[{"role": "user", "content": prompt}],
             max_tokens=4096,
-            stream=True,
+            stream=False,
         )
-        for chunk in stream:
-            text = chunk.choices[0].delta.content or ""
-            print(text, end="", flush=True)
-            chunks.append(text)
+        if not response.choices:
+            print("[Error] API returned empty choices. Check relay URL and model name.")
+            return
+        text = response.choices[0].message.content or ""
+        print(text, end="", flush=True)
+        chunks.append(text)
 
     print("\n" + "=" * 60)
 
