@@ -111,7 +111,7 @@ def fetch_websearch(cfg):
 
     if engine == "duckduckgo":
         try:
-            from duckduckgo_search import DDGS
+            from ddgs import DDGS
             return [
                 {"title": r["title"], "url": r["href"], "snippet": r.get("body", "")[:300],
                  "source": "DuckDuckGo", "published": ""}
