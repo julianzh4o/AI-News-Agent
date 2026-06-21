@@ -4,7 +4,7 @@
 
 ---
 
-English | [中文](README-ZH.md)
+| English | [中文](README-ZH.md) |
 
 ---
 
@@ -50,9 +50,9 @@ cp config.example.yaml config.yaml
 
 # 4. Fill in your settings in config.yaml
 ai_provider | api_key | base_url | model | language | save_report
-
+```
 Don't forget to comment out the providers you don't need.
-
+```bash
 # 5. Run
 python main.py
 ```
