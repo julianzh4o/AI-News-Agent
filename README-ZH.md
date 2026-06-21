@@ -46,8 +46,9 @@ cp config.example.yaml config.yaml
 
 # 4. 在 config.yaml 中填入你的设置 
 ai_provider | api_key | base_url | model | language | save_report
+```
 别忘了注释掉不需要的AI提供商。
-
+```bash
 # 5. 运行
 python main.py
 ```
