@@ -48,8 +48,8 @@ pip install -r requirements.txt
 # 3. Create your config
 cp config.example.yaml config.yaml
 
-# 4. Fill in your API key in config.yaml
-
+# 4. Fill in your settings in config.yaml
+ai_provider | api_key | base_url | model | language | save_report
 # 5. Run
 python main.py
 ```
