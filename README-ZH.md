@@ -380,7 +380,7 @@ A: 检查以下几点:
 
 ```
 ai-news-agent/
-├── config.example.yaml   # 配置模板（可提交）
+├── config.example.yaml   # 配置模板
 ├── config.yaml           # 本地配置含 Key（已 gitignore）
 ├── requirements.txt      # Python 依赖
 ├── main.py               # 入口
